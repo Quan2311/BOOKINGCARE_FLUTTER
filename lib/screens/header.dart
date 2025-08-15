@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
+import '../services/auth_service.dart';
 
 class Header extends StatefulWidget implements PreferredSizeWidget {
   const Header({super.key});
@@ -25,9 +25,9 @@ class _HeaderState extends State<Header> {
     setState(() => isLoading = true);
     
     try {
-      final isLoggedIn = await ApiService.isLoggedIn();
+      final isLoggedIn = await AuthService.isLoggedIn();
       if (isLoggedIn) {
-        final currentUser = await ApiService.getCurrentUser();
+        final currentUser = await AuthService.getCurrentUser();
         setState(() {
           user = currentUser;
           isLoading = false;
@@ -47,7 +47,7 @@ class _HeaderState extends State<Header> {
   }
 
   Future<void> _handleLogout() async {
-    await ApiService.logout();
+    await AuthService.logout();
     setState(() => user = null);
     if (mounted) {
       Navigator.pushReplacementNamed(context, '/login');
@@ -75,6 +75,10 @@ class _HeaderState extends State<Header> {
         TextButton(
           onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false),
           child: const Text('Home', style: TextStyle(color: Color(0xFF4ade80))),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pushNamed(context, '/medical-services'),
+          child: const Text('Medical Services', style: TextStyle(color: Colors.white)),
         ),
         TextButton(
           onPressed: () => Navigator.pushNamed(context, '/about'),

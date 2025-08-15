@@ -3,6 +3,7 @@ import 'screens/home_page.dart';
 import 'screens/contact_page.dart';
 import 'screens/login_content.dart';
 import 'screens/about_simple.dart';
+import 'screens/simple_medical_services.dart';
 import 'screens/main_layout.dart';
 
 void main() {
@@ -24,6 +25,9 @@ class BookingCareApp extends StatelessWidget {
         '/': (context) => const MainLayout(child: HomePage()),
         '/contact': (context) => const MainLayout(child: ContactPage()),
         '/about': (context) => const MainLayout(child: AboutSimple()),
+        '/medical-services': (context) => MainLayout(
+          child: SimpleMedicalServices(),
+        ),
         '/login': (context) => const MainLayout(child: LoginContent()),
       },
     );

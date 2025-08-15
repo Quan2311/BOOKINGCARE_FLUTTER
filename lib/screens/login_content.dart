@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../services/api_service.dart';
+import '../services/auth_service.dart';
 
 class LoginContent extends StatefulWidget {
   const LoginContent({super.key});
@@ -55,7 +55,7 @@ class _LoginContentState extends State<LoginContent> {
     setState(() => loading = true);
 
     try {
-      final result = await ApiService.login(
+      final result = await AuthService.login(
         phoneNumber: phoneCtrl.text.trim(),
         password: passCtrl.text.trim(),
       );
