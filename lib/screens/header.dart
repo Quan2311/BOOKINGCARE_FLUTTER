@@ -81,6 +81,10 @@ class _HeaderState extends State<Header> {
           child: const Text('Medical Services', style: TextStyle(color: Colors.white)),
         ),
         TextButton(
+          onPressed: () => Navigator.pushNamed(context, '/doctors'),
+          child: const Text('Doctors', style: TextStyle(color: Colors.white)),
+        ),
+        TextButton(
           onPressed: () => Navigator.pushNamed(context, '/about'),
           child: const Text('About', style: TextStyle(color: Colors.white)),
         ),
