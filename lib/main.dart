@@ -6,6 +6,7 @@ import 'screens/about_simple.dart';
 import 'screens/simple_medical_services.dart';
 import 'screens/doctors_page.dart';
 import 'screens/main_layout.dart';
+import 'screens/medical_service_detail_page.dart';
 
 void main() {
   runApp(const BookingCareApp());
@@ -22,6 +23,21 @@ class BookingCareApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: '/',
+      onGenerateRoute: (settings) {
+        // Handle parameterized routes
+        if (settings.name?.startsWith('/medical-services/') == true) {
+          final id = settings.name!.split('/medical-services/')[1];
+          return MaterialPageRoute(
+            builder: (context) => MainLayout(
+              child: MedicalServiceDetailPage(idNameSpecialty: id),
+            ),
+            settings: settings, // Important: pass settings to preserve route info
+          );
+        }
+        
+        // Handle static routes
+        return null;
+      },
       routes: {
         '/': (context) => const MainLayout(child: HomePage()),
         '/contact': (context) => const MainLayout(child: ContactPage()),

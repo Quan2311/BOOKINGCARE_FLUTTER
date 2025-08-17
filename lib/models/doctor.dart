@@ -1,5 +1,31 @@
 import 'specialty.dart';
 
+class User {
+  final String? fullname;
+  final String? email;
+  final String? phoneNumber;
+  final String? gender;
+  final String? birthday;
+
+  User({
+    this.fullname,
+    this.email,
+    this.phoneNumber,
+    this.gender,
+    this.birthday,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      fullname: json['fullname'],
+      email: json['email'],
+      phoneNumber: json['phoneNumber'],
+      gender: json['gender'],
+      birthday: json['birthday'],
+    );
+  }
+}
+
 class Doctor {
   final int id;
   final String firstName;
@@ -12,6 +38,9 @@ class Doctor {
   final bool isActive;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final User? user;
+  final String? experience;
+  final String? qualification;
 
   Doctor({
     required this.id,
@@ -25,9 +54,12 @@ class Doctor {
     this.isActive = true,
     this.createdAt,
     this.updatedAt,
+    this.user,
+    this.experience,
+    this.qualification,
   });
 
-  String get fullName => '$firstName $lastName';
+  String get fullName => user?.fullname ?? '$firstName $lastName';
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
@@ -48,6 +80,11 @@ class Doctor {
       updatedAt: json['updatedAt'] != null 
           ? DateTime.tryParse(json['updatedAt']) 
           : null,
+      user: json['user'] != null 
+          ? User.fromJson(json['user'])
+          : null,
+      experience: json['experience']?.toString(),
+      qualification: json['qualification'],
     );
   }
 

@@ -14,6 +14,7 @@ class _SimpleMedicalServicesState extends State<SimpleMedicalServices> {
   bool loading = true;
   String errorMsg = '';
   Specialty? selectedSpecialty;
+  // Specialty? selectedSpecialty;
 
   @override
   void initState() {
@@ -224,12 +225,23 @@ class _SimpleMedicalServicesState extends State<SimpleMedicalServices> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              selectedSpecialty!.specialtyName,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF223a66),
+                            InkWell(
+                              onTap: () {
+                                // Navigate to medical service detail page using route
+                                print('Navigating to: /medical-services/${selectedSpecialty!.id}');
+                                Navigator.pushNamed(
+                                  context,
+                                  '/medical-services/${selectedSpecialty!.id}',
+                                );
+                              },
+                              child: Text(
+                                selectedSpecialty!.specialtyName,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF223a66),
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 15),
